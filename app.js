@@ -25,7 +25,7 @@ app.use('/users', usersRouter);
 app.use('/accountant',accountantRouter);
 app.use('/admin',adminRouter);
 app.use(session({
-  secret: 'food chef',
+  secret: 'SkL2k20',
    resave: false,
    store: sessionStore,
    saveUninitialized: false,
