@@ -10,10 +10,9 @@ var accountantSchema = new schema({
     email:{
         type:String,
         requried:true,
-        unique:true,
+        unique:true},
         resetPasswordToken: String,
         resetPasswordExpires: Date,
-    },
     mobile:{
         type:String,
         required:true,
