@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Accountant Login</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body> 
+    <div class="container">
+        <% if ( text ) {%>
+        <br>
+        <div class="alert alert-success" role="alert" align="center" id="close">
+        <h4><%= text %></h4>
+        </div>
+        <% } %>
+    <div>
+    <h1>login page</h1>
+        <form action="/login_accountant" method="post" class="agile_form">
+		    <p>UserName</p>
+			<input type="text" name="username" required="required" />
+			<p>Password</p>
+			<input type="password" name="password" required="required" class="password" />
+            <br>
+            <br>
+            <input type="submit" value="LogIn" class="agileinfo" />   
+		</form>
+        <br>
+        <a href="#">Forgot Password</a><br><hr>
+<script>
+  setTimeout(function(){
+    document.querySelector('#close').style.display = 'none';
+  },3000);
+</script>
+
+</body>
+</html>
