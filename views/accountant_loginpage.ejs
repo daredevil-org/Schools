@@ -7,7 +7,7 @@
         <meta charset="utf-8">                
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="accountant-style.css">
+        <link rel="stylesheet" href="stylesheets/accountant-style.css">
     </head>
     <body>
         <div class="container">
@@ -19,13 +19,13 @@
             <% } %>
     <div>
         <div class="w3-container w3-white w3-panel w3-border w3-round-large size">
-        <form action="/login_accountant" class="formset">
-            <h2 id="log"><u>Login</u></h2>
+        <form action="/login_accountant" class="formset" method="POST">
+            <h2 id="log"><u>Login</u></h2><br>
             <h4>Username:</h4>
             <input  class="w3-border w3-round" type="text" name="username" placeholder="Alex" required>
             <h4 >Password:</h4>
             <input id="hover" class="w3-border w3-round" type="password" name="password" placeholder="password" required>
-            <button class="w3-button w3-round w3-blue btn">Sign In</button>
+            <button class="w3-button w3-round w3-blue btn" onclick="location.href='/login_accountant'">Sign In</button>
             <div class="anchor"><a href="/forgot" >Forgot password?</a></div>
         </form>
 
@@ -33,7 +33,7 @@
         <script>
         setTimeout(function(){
             document.getElementById('close').style.display = 'none';
-        },3000);
+        },5000);
         </script>
     </body>
 </html>
