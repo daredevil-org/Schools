@@ -1,0 +1,45 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>
+            Fee updating page
+        </title>
+        <meta charset="Utf-8">
+        <link rel="stylesheet" href="stylesheets/fee.css"> 
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    </head>
+    <body>
+        <div class="container">
+            <% if ( text ) {%>
+                <br>
+                <div class="alert alert-success" role="alert" align="center" id="close">
+                <h4><%= text %></h4>
+                </div>
+                <% } %>
+        </div>
+        <form action="/fee_update" method="POST">
+        <div class="container">  
+            <h1>Check the button and update here</h1>          
+            <label> <input type="radio" name="optradio" value="class_lkg"/>class LKG</label><br>
+            <label> <input type="radio" name="optradio" value="class_ukg"/>class UKG</label><br>
+            <label> <input type="radio" name="optradio" value="class_one"/>class ONE</label><br>
+            <label> <input type="radio" name="optradio" value="class_two"/>class TWO</label><br>
+            <label> <input type="radio" name="optradio" value="class_three"/>class THREE</label><br>
+            <label> <input type="radio" name="optradio" value="class_four"/>class FOUR</label><br>
+            <label> <input type="radio" name="optradio" value="class_five"/>class FIVE</label><br>
+            <label> <input type="radio" name="optradio" value="class_six"/>class SIX</label><br>
+            <label> <input type="radio" name="optradio" value="class_seven"/>class SEVEN</label><br>
+            <label> <input type="radio" name="optradio" value="class_eight"/>class EIGHT</label><br>
+            <label> <input type="radio" name="optradio" value="class_nine"/>class NINE</label><br>
+            <label> <input type="radio" name="optradio" value="class_ten"/>class TEN</label><br>
+            <label> <input type="number" name="amount"/></label><br>
+            <input type="submit" value="Update Fee" />
+
+
+        
+        </div>
+        </form>
+    </body>
+</html>
