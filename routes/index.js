@@ -206,6 +206,29 @@ router.get('/signout_admin',function(req,res){
     res.render('admin_loginpage',{text:req.flash("msg")});
   }
 });
+
+// GET for update fee page 
+router.get('/update_fee',function(req,res){
+  req.flash("msg","Update the fee here");
+  res.render('update_fee',{text:req.flash("msg")});
+});
+
+// POST for update fee
+router.post('/fee_update',function(req,res){
+    // all the code goes here
+    var className = req.body.optradio;
+    var amount = req.body.amount;
+    console.log(className,amount);
+    // we have to create a collection to update any fee 
+    fee.updateOne({[className]:amount }, function(err, res) {
+      // Updated at most one doc, `res.modifiedCount` contains the number
+      // of docs that MongoDB updated
+      if(err) throw err;
+      console.log(res);
+    });
+    req.flash("msg","Updated Sucessfully");
+    res.render('update_fee',{text:req.flash("msg")})
+});
 // POST of accounatant_loginpage
 router.post('/login_accountant',function(req,res,next){
   passport.authenticate("accountant", (err, user, info) => {
@@ -312,6 +335,22 @@ router.post('/signupadmin',function(req,res){
 
 });
 
+function checkIsLoggedIn() {
+  return (req,res,next) =>{
+  if (req.isAuthenticated()) {
+    accountant.findOne({username:req.user.username}, (err, foundname) => {
+        if (err || !foundname) {
+            req.flash("error", "You Cannot Do that Please Logout First");
+            res.render("accountant_homepage",{text:req.flash("error")});
+        } else {
+               return next();
+        }
+    });
+} else {
+    res.redirect("/accountant_loginpage");
+}
+  }
 
+}
 
 module.exports = router;
