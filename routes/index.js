@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var nodemailer = require('nodemailer');
 var async = require('async');
 var crypto = require('crypto');
+var middleware = require("../middleware");
 var router = express.Router();
 // var db;
 var fee = require('../models/fee');
@@ -144,7 +145,10 @@ router.post('/reset/:token', function(req, res) {
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-
+// GET Mainpage
+router.get('/mainpage',function(req,res,next){
+  res.render('mainpage',{text:req.flash("msg")});
+});
 // GET accounatant login page
 router.get('/accountant_loginpage',function(req,res){
   req.flash("msg","Please Login to continue.");
@@ -152,7 +156,7 @@ router.get('/accountant_loginpage',function(req,res){
 });
 
 // GET accountant home page
-router.get('/accountant_homepage',function(req,res){
+router.get('/accountant_homepage',middleware.checkAuthentication,function(req,res){
   req.flash("msg","Logged in Successfully");
   res.render('accountant_homepage',{text:req.flash("msg")});
 });
@@ -170,7 +174,7 @@ router.get('/admin_loginpage',function(req,res){
 });
 
 // GET admin home page
-router.get('/admin_homepage',function(req,res){
+router.get('/admin_homepage',middleware.checkadminAuthentication,function(req,res){
   req.flash("msg","Logged in Successfully");
   res.render('admin_homepage',{text:req.flash("msg")});
 });
@@ -182,7 +186,9 @@ router.get('/admin_registerpage',function(req,res){
 }); 
 // GET to logout
 router.get('/logout',function(req,res){
+  // console.log(req.isAuthenticated());
   req.logout();
+  // console.log(req.isAuthenticated());
   if(req.isAuthenticated())
   {
     req.flash("msg","Logout did not take place");
@@ -208,7 +214,7 @@ router.get('/signout_admin',function(req,res){
 });
 
 // GET for update fee page 
-router.get('/update_fee',function(req,res){
+router.get('/update_fee',middleware.checkadminAuthentication,function(req,res){
   req.flash("msg","Update the fee here");
   res.render('update_fee',{text:req.flash("msg")});
 });
