@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Main Page</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <% if ( text ) {%>
+                <br>
+                <div class="alert alert-success" role="alert" align="center" id="close">
+                <h4><%= text %></h4>
+                </div>
+                <% } %>
+        </div>
+        <input type="button" value="home" onclick="location.href='/'" />
+    </body>
+</html>
