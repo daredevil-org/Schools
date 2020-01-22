@@ -18,7 +18,130 @@ let url = process.env.DATABASEURL || "mongodb://localhost/skl";
     console.log('Connected to Mongodb!');
  });
 
-//  Forgot password code starts from here
+// Forgot password code for admin
+router.get('/forgot_admin',function(req,res){
+  req.flash("msg","Reset Your Password here");
+  res.render('forgot_admin',{text:req.flash("msg")});
+});
+
+router.post('/forgot_admin', function(req, res, next) {
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err, buf) {
+        var token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      admin.findOne({ email: req.body.email }, function(err, user) {
+        if (!user) {
+          req.flash("msg", "No account with that email address exists.");
+          console.log("No account with that email address exists.");
+          return res.render('forgot_admin',{text:req.flash("msg")});
+        }
+        
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    },
+    function(token, user, done) {
+      var smtpTransport = nodemailer.createTransport({
+        service: 'Gmail', 
+        auth: {
+          user: 'mrcetclub@gmail.com',
+          pass: '#thedarkangels'
+        }
+      });
+      var mailOptions = {
+        to: user.email,
+        from: 'mrcetclub@gmail.com',
+        subject: 'Password Reset',
+        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+          'http://' + req.headers.host + '/reset_admin/' + token + '\n\n' +
+          'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        console.log('mail sent');
+        req.flash("msg", "An e-mail has been sent to " + user.email + " with further instructions.");
+        done(err, 'done');
+      });
+    }
+  ], function(err) {
+    if (err) return next(err);
+    res.render('forgot_admin',{text:req.flash("msg")});
+  });
+});
+
+router.get('/reset_admin/:token', function(req, res) {
+  admin.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+    if (!user) {
+      req.flash("msg", "Password reset token is invalid or has expired.");
+      return res.render('forgot_admin',{text:req.flash("msg")});
+    }
+    res.render('reset_admin', {token: req.params.token});
+  });
+});
+
+router.post('/reset_admin/:token', function(req, res) {
+  async.waterfall([
+    function(done) {
+      admin.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+        if (!user) {
+          req.flash('error', 'Password reset token is invalid or has expired.');
+          console.log("Password reset token is invalid or has expired.");
+          return res.redirect('back');
+        }
+        if(req.body.password === req.body.confirm) {
+          var password =req.body.password;
+          user.setPassword(password, function(err) {
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
+
+            user.save(function(err) {
+              req.logIn(user, function(err) {
+                done(err, user);
+              });
+            });
+          })
+        } else {
+            req.flash("error", "Passwords do not match.");
+            console.log("Password don't match");
+            return res.redirect('back');
+        }
+      });
+    },
+    function(user, done) {
+      var smtpTransport = nodemailer.createTransport({
+        service: 'Gmail', 
+        auth: {
+          user: 'mrcetclub@gmail.com',
+          pass: '#thedarkangels'
+        }
+      });
+      var mailOptions = {
+        to: user.email,
+        from: 'mrcetclub@mail.com',
+        subject: 'Your password has been changed',
+        text: 'Hello, Admin\n\n' +
+          'This is a confirmation that the password for your account with username :' + user.username + ' associated with email :' + user.email + ' has just been changed.\n'
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        req.flash("msg", "Success! Your password has been changed.");
+        console.log("Password changed");
+        done(err);
+      });
+    }
+  ], function(err) {
+    res.render('admin_homepage',{text:req.flash("msg")});
+  });
+});
+
+//  Forgot password code starts from here for accountant
 router.get('/forgot',function(req,res){
   req.flash("msg","Reset Your Password here");
   res.render('forgot',{text:req.flash("msg")});
