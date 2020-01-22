@@ -17,7 +17,7 @@ middlewareObj.checkAuthentication = function (req, res, next) {
             if (err || !foundGroup) {
                 req.logout();
                 console.log("logged out");
-                req.flash("msg", "You Cannot Do that, You Logged out successfully");
+                req.flash("msg", "You Cannot Do that, kindly get authenticated");
                 res.redirect("/mainpage");
             } else {
                  return next();
@@ -35,14 +35,11 @@ middlewareObj.checkadminAuthentication = function (req, res, next) {
                 req.logout();
                 console.log(req.isAuthenticated());
                 console.log("logged out");
-                req.flash("msg", "You Cannot Do that, You Logged out successfully");
+                req.flash("msg", "You Cannot Do that, kindly get authenticated");
                 res.redirect("/mainpage");
             } else {
                 return next();
             }
-
-
-
         });
     } else {
         res.redirect("/admin_loginpage");
