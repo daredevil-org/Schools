@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin Forgot Password page</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    
+    <div class="container">
+        <% if ( text ) {%>
+        <br>
+        <div class="alert alert-success" role="alert" align="center" id="close">
+        <h4><%= text %></h4>
+        </div>
+        <% } %>
+    <div>
+    <form action="/forgot_admin" method="POST">
+        <p>Email:</p>
+        <input type="text" name="email" placeholder="example@gmail.com"/>
+        <br><br>
+        <input type="submit" value="Reset Password">
+    </form>
+    
+  </body>
+</html>
