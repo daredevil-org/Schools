@@ -4,9 +4,9 @@
 <title>Admin Sign Up</title>
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-       <link="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="e1.css">
+        <link rel="stylesheet" href="/stylesheets/admin-register-style.css">
 <body>
 <body>
 	<div class="container">
@@ -17,33 +17,25 @@
 		  </div>
 		  <% } %>
 		  <div class="w3-container w3-white w3-panel w3-border w3-round-large size">
-           
-                <div >
-                	
                     <form action="/signupadmin" method="POST" class="formset">
-                    	<u><h2 style="text-align:center" id='log'> Admin Registration</h2></u><br>
-					  <h3>Username</h3>
+                    	<u><h2 id="log"> Admin Registration</h2></u>
+					  <h3>Username:</h3>
 					  <input type="text" class="w3-border w3-round" name="username" required="required" placeholder="Example"/>
-                      <h3>Email</h3>
+                      <h3>Email:</h3>
                       <input class="w3-border w3-round"type="text" name="email" id="identity"  required="required" placeholder="example@mail.com">
-                      <h3>Mobile</h3>
+                      <h3>Mobile:</h3>
                       <input class="w3-border w3-round" type="tel" name="mobile" required="required" placeholder="91210*****" />                
-                      <h3>Password</h3>
+                      <h3>Password:</h3>
 					  <input class="w3-border w3-round" type="password" name="password" id="password1"  required="required" placeholder="Password">
-					  <h3>Confirm Password</h3>
+					  <h3>Confirm Password:</h3>
 					  <input class="w3-border w3-round" type="password" name="ConfirmPassword" id="password2"  required="required" placeholder="Confirm Password">
-                        <br>
                         <br>
 					   <input class="w3-button w3-round w3-blue btn" type="submit" value="Signup"/><br>
 					   <input class="w3-button w3-round w3-blue btn" type="reset" value="Reset" />
 					   <br>
 					   <br>
-                            
-                                <a href="/" method="GET">- - - - - Home - - - - - - </a>
-                            
+                        <div class="anchor"><a href="/" method="GET">Go Home</a></div>
 					</form>
-				
-				</div>
 		 </div>
 
 <script type="text/javascript">
