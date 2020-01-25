@@ -1,0 +1,39 @@
+<html>
+   <head>
+      <title>change picture</title>
+      <style>
+      body{
+          margin:0;
+          padding:0;
+          
+      }
+      </style>
+      <script type = "text/javascript">
+          function displayNextImage() {
+              x = (x === images.length - 1) ? 0 : x + 1;
+              document.getElementById("img").src = images[x];
+          }
+
+          
+
+          function startTimer() {
+              setInterval(displayNextImage, 2000);
+          }
+
+          var images = [], x = -1;
+          images[0] = "images/sportsimage.png";
+          images[1] = "images/culturalimage.png";
+          images[2] = "images/image1.png";
+          images[3] = "images/image3.png";
+          images[4] = "images/image2.png";
+          images[5] = "images/student.png";
+          
+      </script>
+   </head>
+
+   <body onload = "startTimer()">
+       <img id="img" src="images/student.png" width="100%" height="400"/>
+       <!----<button type="button" onclick="displayPreviousImage()">Previous</button>-->
+       <!--<button type="button" onclick="displayNextImage()">Next</button>-->
+   </body>
+</html>
