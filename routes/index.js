@@ -360,23 +360,13 @@ router.post('/fee_update',function(req,res){
     res.render('update_fee',{text:req.flash("msg")})
 });
 
+//GET for Student Info page
 router.get('/insert_StudentInfo',function(req,res,next){
-  /*var obj={firstname:"Amrutha",
-           lastname:"Kanumuri",
-           phone_no:"7032084583",
-           email:"amruthajanaki2000@gmail.com",
-           rollno:"1",
-           fathername:"K srinivasa raju",
-           mothername:"k sai geetha",
-           classname:"1A",
-    };
-    student.create(obj,function(err,res){
-      if(err) {console.log(err);}
-        console.log(res);
-    });*/
+  
     res.render('insert_StudentInfo');
 });
 
+//POST for Student Info page
 router.post('/insert_StudentInfo',function(req,res,next){
      var obj={
          firstname:req.body.firstname,
