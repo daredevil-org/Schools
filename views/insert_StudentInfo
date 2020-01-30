@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">                
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="stylesheets/admin-style.css">
+    </head>
+    <body>
+        <div>
+            <div class="w3-container w3-white w3-panel w3-border w3-round-large size">
+            <form action="/insert_StudentInfo" class="formset" method="POST">
+                <h2><u>Student Form</u></h2><br>
+                <h4>First Name:</h4>
+                <input  class="w3-border w3-round" type="text" name="firstname" placeholder="Alex" required><br>
+                <h4 >Last Name:</h4>
+                <input class="w3-border w3-round" type="text" name="lastname" placeholder="salvatore" required><br>               
+                <h4>Father's Name:</h4>
+                <input  class="w3-border w3-round" type="text" name="fathername" placeholder="stefan" required><br>
+                <h4>phone No:</h4>
+                <input  class="w3-border w3-round" type="text" name="phone_no" placeholder="xxxxxxxxxx" required><br>
+                <h4>Email:</h4>
+                <input  class="w3-border w3-round" type="text" name="email" placeholder="abc@gmail.com" required><br>
+                <h4>roll no:</h4>
+                <input  class="w3-border w3-round" type="text" name="rollno" placeholder="10" required><br>
+                <button class="w3-button w3-round w3-blue btn" onclick="">Submit</button>
+               
+            </form>
+         </div>
+    </body>
+</html>
