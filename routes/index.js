@@ -10,6 +10,7 @@ var router = express.Router();
 var fee = require('../models/fee');
 var accountant = require('../models/accountant');
 var admin =require('../models/admin');
+var student =require('../models/student');
 
 // connecting to database #mongodb
 let url = process.env.DATABASEURL || "mongodb://localhost/skl";
@@ -358,6 +359,32 @@ router.post('/fee_update',function(req,res){
     req.flash("msg","Updated Sucessfully");
     res.render('update_fee',{text:req.flash("msg")})
 });
+
+//GET for Student Info page
+router.get('/insert_StudentInfo',function(req,res,next){
+  
+    res.render('insert_StudentInfo');
+});
+
+//POST for Student Info page
+router.post('/insert_StudentInfo',function(req,res,next){
+     var obj={
+         firstname:req.body.firstname,
+         lastname:req.body.lastname,
+         fathername:req.body.fathername,
+         phone_no:req.body.phone_no,  
+         email:req.body.email,     
+         rollno:req.body.rollno, 
+     };
+     student.create(obj,function(err,res){
+         if(err) {console.log(err);}
+         console.log(res);
+     });
+     console.log("inserted successfully...");
+     res.render('insert_StudentInfo');
+});
+
+
 // POST of accounatant_loginpage
 router.post('/login_accountant',function(req,res,next){
   passport.authenticate("accountant", (err, user, info) => {
