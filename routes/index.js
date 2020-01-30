@@ -10,6 +10,7 @@ var router = express.Router();
 var fee = require('../models/fee');
 var accountant = require('../models/accountant');
 var admin =require('../models/admin');
+var student =require('../models/student');
 
 // connecting to database #mongodb
 let url = process.env.DATABASEURL || "mongodb://localhost/skl";
@@ -359,7 +360,6 @@ router.post('/fee_update',function(req,res){
     res.render('update_fee',{text:req.flash("msg")})
 });
 
-//GET of Student Info Page
 router.get('/insert_StudentInfo',function(req,res,next){
   /*var obj={firstname:"Amrutha",
            lastname:"Kanumuri",
@@ -377,7 +377,6 @@ router.get('/insert_StudentInfo',function(req,res,next){
     res.render('insert_StudentInfo');
 });
 
-//POST of Student Info page
 router.post('/insert_StudentInfo',function(req,res,next){
      var obj={
          firstname:req.body.firstname,
