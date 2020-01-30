@@ -358,6 +358,44 @@ router.post('/fee_update',function(req,res){
     req.flash("msg","Updated Sucessfully");
     res.render('update_fee',{text:req.flash("msg")})
 });
+
+//GET of Student Info Page
+router.get('/insert_StudentInfo',function(req,res,next){
+  /*var obj={firstname:"Amrutha",
+           lastname:"Kanumuri",
+           phone_no:"7032084583",
+           email:"amruthajanaki2000@gmail.com",
+           rollno:"1",
+           fathername:"K srinivasa raju",
+           mothername:"k sai geetha",
+           classname:"1A",
+    };
+    student.create(obj,function(err,res){
+      if(err) {console.log(err);}
+        console.log(res);
+    });*/
+    res.render('insert_StudentInfo');
+});
+
+//POST of Student Info page
+router.post('/insert_StudentInfo',function(req,res,next){
+     var obj={
+         firstname:req.body.firstname,
+         lastname:req.body.lastname,
+         fathername:req.body.fathername,
+         phone_no:req.body.phone_no,  
+         email:req.body.email,     
+         rollno:req.body.rollno, 
+     };
+     student.create(obj,function(err,res){
+         if(err) {console.log(err);}
+         console.log(res);
+     });
+     console.log("inserted successfully...");
+     res.render('insert_StudentInfo');
+});
+
+
 // POST of accounatant_loginpage
 router.post('/login_accountant',function(req,res,next){
   passport.authenticate("accountant", (err, user, info) => {
