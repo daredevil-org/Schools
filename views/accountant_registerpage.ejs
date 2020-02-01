@@ -1,59 +1,118 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
+
 <title>Accountant Sign Up</title>
+
 		<meta charset="utf-8">
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="accountant-style.css">
+
 <body>
+
 	<div class="container">
+
 		<% if ( text ) {%>
+
 		  <br>
+
 		  <div class="alert alert-success" role="alert" align="center" id="close">
+
 			<h4><%= text %></h4>
+
 		  </div>
+
 		  <% } %>
-   <h1 >Register here</h1>
-                <div >
-                    <form action="/signupaccountant" method="POST">
-					  <p>Username</p>
-					  <input type="text" name="username" required="required" placeholder="Example"/>
-                      <p>Email</p>
-                      <input type="text" name="email" id="identity"  required="required" placeholder="example@mail.com">
-                      <p>Mobile</p>
-                      <input type="tel" name="mobile" required="required" placeholder="91210*****" />                
-                      <p>Password</p>
-					  <input type="password" name="password" id="password1"  required="required" placeholder="Password">
-					  <p>Confirm Password</p>
-					  <input type="password" name="ConfirmPassword" id="password2"  required="required" placeholder="Confirm Password">
+
+   
+
+                <div class="w3-container w3-white w3-panel w3-border w3-round-large size">
+
+                    <form action="/signupaccountant" method="POST" class="formset">
+                        <h2 id="log"><u> Accountant Registration</h2></u></h2><br>
+
+					  <h3>Username :</h3>
+
+					  <input type="text"  class="w3-border w3-round" name="username" required="required" placeholder="Example"/>
+
+                      <h3>Email :</h3>
+
+                      <input type="text" class="w3-border w3-round" name="email" id="identity"  required="required" placeholder="example@mail.com">
+
+                      <h3>Mobile :</h3>
+
+                      <input type="tel" class="w3-border w3-round" name="mobile" required="required" placeholder="91210*****" />                
+
+                      <h3>Password :</h3>
+
+					  <input type="password" class="w3-border w3-round" name="password" id="password1"  required="required" placeholder="Password">
+
+					  <h3>Confirm Password :</h3>
+
+					  <input type="password" class="w3-border w3-round" name="ConfirmPassword" id="password2"  required="required" placeholder="Confirm Password">
+
                         <br>
+
                         <br>
-					   <input type="submit" value="Signup"/>
-					   <input type="reset" value="Reset" />
+
+					   <input type="submit"  class="w3-button w3-round w3-blue btn" value="Signup"/>
+
+					   <input type="reset"  class="w3-button w3-round w3-blue btn" value="Reset" />
+
 					   <br>
+
 					   <br>
-                                <a href="/" method="GET">- - - - - Home - - - - - - </a>
+
+                       <div class="anchor"><a href="/" method="GET">Go Home</a></div>
 					</form>
+
 				</div>
 
+
+
 <script type="text/javascript">
+
 		window.onload = function () {
+
 			document.getElementById("password1").onchange = validatePassword;
+
 			document.getElementById("password2").onchange = validatePassword;
+
 		}
+
 		function validatePassword(){
+
 			var pass2=document.getElementById("password2").value;
+
 			var pass1=document.getElementById("password1").value;
+
 			if(pass1!=pass2)
+
 				document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+
 			else
+
 				document.getElementById("password2").setCustomValidity('');
+
 				//empty string means no validation error
+
         }
+
         setTimeout(function(){
+
             document.getElementById('close').style.display = 'none';
+
         },3000);
+
 </script>
+
 </body>
+
 </html>
