@@ -360,6 +360,26 @@ router.post('/fee_update',function(req,res){
     res.render('update_fee',{text:req.flash("msg")})
 });
 
+//get search
+router.get('/search',function(req,res,next){
+  res.render('search',{text:'search stdent roll'});
+});
+//post for search
+router.post('/search',function(req,res){
+ var obj={
+   rollnumber:req.body.rollno};
+ console.log(obj);
+ 
+ student.findOne(obj,function(err,result){
+   if(err){
+     console.log(err);
+   }
+   if(result!==null){ res.render('search',{text:'found'});}
+  else{res.render('search',{text:'not found'});}
+ });
+ //res.render('search',{text:'not found});
+});
+
 //GET for Student Info page
 router.get('/insert_StudentInfo',function(req,res,next){
   
