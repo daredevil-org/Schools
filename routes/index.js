@@ -362,7 +362,7 @@ router.post('/fee_update',function(req,res){
 
 //get search
 router.get('/search',function(req,res,next){
-  res.render('search',{text:'search stdent roll'});
+  res.render('search',{text:'search student roll'});
 });
 //post for search
 router.post('/search',function(req,res){
