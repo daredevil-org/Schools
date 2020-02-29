@@ -360,6 +360,24 @@ router.post('/fee_update',function(req,res){
     res.render('update_fee',{text:req.flash("msg")})
 });
 
+// GET for create
+router.get('/create',function(req,res){
+  res.render('create',{text:'submit here'});
+});
+
+// POST to create dynamic collection
+router.post('/create',function(req,res){
+
+  var name = req.body.getname;
+  var newCollection = mongoose.model(name,student);
+  newCollection.create({},function(err,result){
+    if(err)
+    console.log(err);
+    else
+    console.log("Done...!");
+  });
+  res.render('create',{text:'Done!'});
+});
 //get search
 router.get('/search',function(req,res,next){
   res.render('search',{text:'search student roll'});
