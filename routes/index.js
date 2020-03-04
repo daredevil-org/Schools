@@ -422,6 +422,24 @@ router.post('/insert_StudentInfo',function(req,res,next){
      res.render('insert_StudentInfo');
 });
 
+// GET for create
+router.get('/create',function(req,res){
+  res.render('create',{text:'submit here'});
+});
+
+// POST to create dynamic collection
+router.post('/create',function(req,res){
+
+  var name = req.body.getname;
+  var newCollection = mongoose.model(name,student);
+  newCollection.create({},function(err,result){
+    if(err)
+    console.log(err);
+    else
+    console.log("Done...!");
+  });
+  res.render('create',{text:'Done!'});
+});
 
 // POST of accounatant_loginpage
 router.post('/login_accountant',function(req,res,next){
