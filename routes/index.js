@@ -400,8 +400,9 @@ router.post('/search',function(req,res){
 
 //GET for Student Info page
 router.get('/insert_StudentInfo',function(req,res,next){
-  
-    res.render('insert_StudentInfo');
+  fee.find({},function(err,result){
+    if(err) {console.log(err);}
+    res.render('insert_StudentInfo',{list:result});
 });
 
 //POST for Student Info page
@@ -419,7 +420,11 @@ router.post('/insert_StudentInfo',function(req,res,next){
          console.log(res);
      });
      console.log("inserted successfully...");
-     res.render('insert_StudentInfo');
+    fee.find({},function(err,result){
+        if(err) {console.log(err);}
+        console.log(res);
+         res.render('insert_StudentInfo',{list:result});
+     });
 });
 
 // GET for create
