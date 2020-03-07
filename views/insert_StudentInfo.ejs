@@ -27,5 +27,31 @@
                
             </form>
          </div>
+         
+         <!-- side display -->
+
+       <div class="w3-container w3-white w3-panel w3-border w3-round-large size3">
+        <div align="center"><br>
+         <br>
+         <%  list.forEach(list => {%>
+             <% if(list){%>
+                 
+                <p> Donation: <%=list.donation%><br></p>
+                <p> class-LKG <%=list.class_lkg%><br></p>
+                <p> class-UKG <%=list.class_ukg%><br></p>
+                <p> class-ONE <%=list.class_one%><br></p>
+                <p> class-TWO <%=list.class_two%><br></p>
+                <p> class-THREE <%=list.class_three%><br></p>
+                <p> class-FOUR <%=list.class_four%><br></p>
+                <p> class-FIVE <%=list.class_five%><br></p>
+                <p> class-SIX <%=list.class_six%><br></p>
+                <p> class-SEVEN <%=list.class_seven%><br></p>
+                <p> class-EIGHT <%=list.class_eight%><br></p>
+                <p> class-NINE <%=list.class_nine%><br></p>
+                <p> class-TEN <%=list.class_ten%><br></p>
+ 
+     <%}})%>
+        </div>
+     </div>
     </body>
 </html>
