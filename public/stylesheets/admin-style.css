@@ -22,9 +22,16 @@ body{
    height:700px;
    width: 500px;
    margin-top: 4rem;
-   margin-left: auto;
-   margin-right: auto;
+   margin-left:10rem;
    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.size3{
+    height:820px;
+    width:500px;
+    margin-top:-56rem;
+    margin-right:10rem;
+    margin-left:auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .formset{
     margin-left: auto;
