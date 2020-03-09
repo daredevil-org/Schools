@@ -1,16 +1,29 @@
 body{
     background-image: url('background.jpeg');
-    /* background-size: auto; */
     background-repeat: no-repeat;
 }
 .place{
     padding-top: 2rem;
     text-align: center;
-    /* color:rgb(253, 241, 241); */
     color:black;
     
 }
 .size{
+    height: 800px;
+    width: 500px;
+    margin-top: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ }
+ .size3{
+    height: 800px;
+    width: 500px;
+    margin-top: 4rem;
+    margin-left: 10rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ }
+.size2{
    height: 500px;
    width: 500px;
    margin-top: 4rem;
@@ -18,21 +31,14 @@ body{
    margin-right: auto;
    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.size2{
-   height:700px;
-   width: 500px;
-   margin-top: 4rem;
-   margin-left:10rem;
-   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.size3{
-    height:820px;
-    width:500px;
-    margin-top:-56rem;
-    margin-right:10rem;
-    margin-left:auto;
+.size1{
+    height: 800px;
+    width: 500px;
+    margin-right: 10rem;
+    margin-top: -54rem;
+    margin-left: auto;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
+ }
 .formset{
     margin-left: auto;
     margin-right: auto;
