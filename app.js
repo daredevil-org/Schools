@@ -7,7 +7,7 @@ var logger = require('morgan');
 var passport = require("passport");
 var flash = require('connect-flash');
 var bodyParser = require('body-parser');
-LocalStrategy = require("passport-local").Strategy;
+var LocalStrategy = require("passport-local").Strategy;
 var MongoDBStore = require('connect-mongodb-session')(session);
 
 var indexRouter = require('./routes/index');
