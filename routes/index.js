@@ -5,7 +5,7 @@ var nodemailer = require('nodemailer');
 var async = require('async');
 var crypto = require('crypto');
 var shortid = require('shortid');
-shortid.characters('0123456789');
+shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@');
 var middleware = require("../middleware");
 var router = express.Router();
 var fee = require('../models/fee');
