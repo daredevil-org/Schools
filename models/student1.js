@@ -44,4 +44,4 @@ var studentSchema = new schema({
     
 })
 
-module.exports = mongoose.model('student',studentSchema);
+module.exports = studentSchema;

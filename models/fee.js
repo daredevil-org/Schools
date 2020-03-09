@@ -44,7 +44,7 @@ var feeSchema = new schema({
     },
     class_eight:{
         type:Number,
-       default:1,
+       default:10000,
     },
     class_nine:{
         type:Number,

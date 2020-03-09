@@ -12,7 +12,9 @@ var adminSchema = new schema({
         requried:true,
         unique:true
     },
+
     resetPasswordToken: String,
+
     resetPasswordExpires: Date,
     
     mobile:{
