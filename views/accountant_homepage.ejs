@@ -3,9 +3,15 @@
   <head>
     <title>Accountant home page</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/admin-style.css">
   </head>
   <body>
     <h1><%= text %></h1>
-    <input type="submit" value="logout" onclick="location.href='/logout'" method="GET"/>
+    <input type="button" value="payment info" onclick="location.href='/payment'" method="GET" class="w3-button w3-round w3-blue btn"/>
+    <!-- <input type="button" value="create new batch" onclick="location.href='/create'" class="w3-button w3-round w3-blue btn" /> -->
+    <input type="submit" value="logout" onclick="location.href='/logout'" method="GET" class="w3-button w3-round w3-blue btn"/>
+    <script src="../javascript/block.js" ></script>
   </body>
 </html>

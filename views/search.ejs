@@ -1,8 +1,26 @@
+<!DOCTYPE html>
 <html>
-    <head>search</head>
-    <body><h1><%= text%></h1>
-        <div><form action="/search" method="POST">
-        <p>search</p>
-    <input type="text" name="rollno"/></form></div>
+    <head>
+        <title>Student search</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="stylesheets/admin-style.css">
+    </head>
+    <body>
+        <h1><%= text %></h1>
+        <div class="w3-container w3-white w3-panel  w3-round-large">
+            <form action="/search" method="POST">
+                <input type="text" name="adminid" /><br>
+                <input type="submit" value="search" class="w3-button w3-round w3-blue btn" /><br>
+                <input type="button" value="homepage" onclick="location.href='/admin_homepage'" class="w3-button w3-round w3-blue btn"/>
+            </form>
+        </div>
+        <div class="w3-container w3-white w3-panel w3-round-large">
+            <li><b>Firstname:</b> <%= student.firstname %></li>
+            <li><b>Fathers name:</b> <%= student.fathername %></li>
+           <li><b>Roll number:</b> <%= student.rollno %></li>
+           <li><b>Email:</b> <%= student.email %></li>
+
+        </div>
     </body>
 </html>

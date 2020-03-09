@@ -3,9 +3,20 @@
   <head>
     <title>Admin home page</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/admin-style.css">
   </head>
   <body>
     <h1><%= text %></h1>
-    <input type="submit" value="logout" onclick="location.href='/signout_admin'" method="GET"/>
+    <input type="button" value="update fee" onclick="location.href='/update_fee'" method="GET" class="w3-button w3-round w3-blue btn"/>
+    <input type="button" value="search student" onclick="location.href='/search'" method="GET" class="w3-button w3-round w3-blue btn"/>
+    <input type="button" value="Insert Student" onclick="location.href='/insert_StudentInfo'" method="GET" class="w3-button w3-round w3-blue btn"/>
+    <input type="button" value="payment" onclick="location.href='/payment'" method="GET" class="w3-button w3-round w3-blue btn"/>
+    <input type="button" value="update student info" onclick="location.href='/update'" method="GET" class="w3-button w3-round w3-blue btn"/>
+    <input type="button" value="fee payment" onclick="location.href='/feepayment'" method="GET" class="w3-button w3-round w3-blue btn" />
+    <input type="button" value="show students" onclick="location.href='/show'" method="GET" class="w3-button w3-round w3-blue btn" />
+    <input type="submit" value="logout" onclick="location.href='/signout_admin'" method="GET" class="w3-button w3-round w3-blue btn"/>
+    <script src="../javascript/block.js"></script>
   </body>
 </html>

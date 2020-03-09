@@ -8,7 +8,8 @@
     </head>
     <body>
         <div>
-            <div class="w3-container w3-white w3-panel w3-border w3-round-large size2">
+            <center><%= text %></center>
+            <div class="w3-container w3-white w3-panel w3-border w3-round-large size3">
             <form action="/insert_StudentInfo" class="formset" method="POST">
                 <h2><u>Student Form</u></h2><br>
                 <h4>First Name:</h4>
@@ -23,35 +24,36 @@
                 <input  class="w3-border w3-round" type="text" name="email" placeholder="abc@gmail.com" required><br>
                 <h4>roll no:</h4>
                 <input  class="w3-border w3-round" type="text" name="rollno" placeholder="10" required><br>
+                <h4>Class:</h4>
+                <input  class="w3-border w3-round" type="text" name="class" placeholder="class_six" required><br>
+                <h4>fee:</h4>
+                <input  class="w3-border w3-round" type="text" name="fee" placeholder="10,000" required><br>
                 <button class="w3-button w3-round w3-blue btn" onclick="">Submit</button>
-               
             </form>
          </div>
-         
-         <!-- side display -->
-
-       <div class="w3-container w3-white w3-panel w3-border w3-round-large size3">
-        <div align="center"><br>
-         <br>
-         <%  list.forEach(list => {%>
-             <% if(list){%>
-                 
-                <p> Donation: <%=list.donation%><br></p>
-                <p> class-LKG <%=list.class_lkg%><br></p>
-                <p> class-UKG <%=list.class_ukg%><br></p>
-                <p> class-ONE <%=list.class_one%><br></p>
-                <p> class-TWO <%=list.class_two%><br></p>
-                <p> class-THREE <%=list.class_three%><br></p>
-                <p> class-FOUR <%=list.class_four%><br></p>
-                <p> class-FIVE <%=list.class_five%><br></p>
-                <p> class-SIX <%=list.class_six%><br></p>
-                <p> class-SEVEN <%=list.class_seven%><br></p>
-                <p> class-EIGHT <%=list.class_eight%><br></p>
-                <p> class-NINE <%=list.class_nine%><br></p>
-                <p> class-TEN <%=list.class_ten%><br></p>
- 
-     <%}})%>
+        <div class="w3-container w3-white w3-panel w3-border w3-round-large size1">
+           <div align="center"><br>
+            <br>
+            <%  list.forEach(list => {%>
+                <% if(list){%>
+                    
+                   <p> Donation: <%=list.donation%><br></p>
+                   <p> class-LKG <%=list.class_lkg%><br></p>
+                   <p> class-UKG <%=list.class_ukg%><br></p>
+                   <p> class-ONE <%=list.class_one%><br></p>
+                   <p> class-TWO <%=list.class_two%><br></p>
+                   <p> class-THREE <%=list.class_three%><br></p>
+                   <p> class-FOUR <%=list.class_four%><br></p>
+                   <p> class-FIVE <%=list.class_five%><br></p>
+                   <p> class-SIX <%=list.class_six%><br></p>
+                   <p> class-SEVEN <%=list.class_seven%><br></p>
+                   <p> class-EIGHT <%=list.class_eight%><br></p>
+                   <p> class-NINE <%=list.class_nine%><br></p>
+                   <p> class-TEN <%=list.class_ten%><br></p>
+                   <input type="button" value="homepage" onclick="location.href='/admin_homepage'" class="w3-button w3-round w3-blue btn">
+    
+        <%}})%>
+           </div>
         </div>
-     </div>
     </body>
 </html>

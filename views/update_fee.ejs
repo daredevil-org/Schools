@@ -36,10 +36,13 @@
             <label> <input type="radio" name="optradio" value="class_ten"/>class TEN</label><br>
             <label> <input type="number" name="amount"/></label><br>
             <input type="submit" value="Update Fee" />
-
-
-        
+            <input type="button" value="homepage" onclick="location.href='/admin_homepage'" />
         </div>
         </form>
+        <script>
+        setTimeout(function(){
+            document.getElementById('close').style.display = 'none';
+        },3000);
+        </script>
     </body>
 </html>

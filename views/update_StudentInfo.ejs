@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Update student information
+        </title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="stylesheets/admin-style.css">
+    </head>
+    <body>
+        
+            <div class="w3-container w3-white w3-panel w3-border w3-round-large size3">
+            <form action="/updateInfo" class="formset" method="POST">
+                <h2><u>Student Form</u></h2><br>
+                <h4>First Name:</h4>
+                <input  class="w3-border w3-round" type="text" name="firstname" id="fname" placeholder="alex" required><br>
+                <h4 >Last Name:</h4>
+                <input class="w3-border w3-round" type="text" name="lastname" id="lname"placeholder="salvatore" required><br>               
+                <h4>Father's Name:</h4>
+                <input  class="w3-border w3-round" type="text" name="fathername" id="fathername"placeholder="stefan" required><br>
+                <h4>phone No:</h4>
+                <input  class="w3-border w3-round" type="text" name="phone_no" id="phonenumber"placeholder="xxxxxxxxxx" required><br>
+                <h4>Email:</h4>
+                <input  class="w3-border w3-round" type="text" name="email" id="emailid"placeholder="abc@gmail.com" required><br>
+                <h4>roll no:</h4>
+                <input  class="w3-border w3-round" type="text" name="r" id="roll"placeholder="10"  required><br>
+                <h4>Class:</h4>
+                <input  class="w3-border w3-round" type="text" name="class" id="standard"placeholder="class_six" required><br>
+                <h4>admission id:</h4>
+                <input  class="w3-border w3-round" type="text" name="admissionid" id="id" readonly required><br>
+
+                <button class="w3-button w3-round w3-blue btn" onclick="">Submit</button>
+            </form>
+         </div>
+         <div class="w3-container w3-white w3-panel w3-border w3-round-large size1">
+            <div align="center"><br>
+
+             <br>
+             <input type="button" value="homepage" onclick="location.href='/admin_homepage'" class="w3-button w3-round w3-blue btn"/>
+
+            
+             <% if(list){%>
+                 
+                <ul>
+                    <li><h4><b>Firstname</b> :<span id="fn"><%=list.firstname%></span></h4></li>
+                    <li><h4><b>Lastname</b> :<span id="ln"><%=list.lastname%></span></h4></li>
+                    <li><h4><b>Fathers name</b> :<span id="ffn"><%=list.lastname%></span><%=list.fathername%></h4></li>
+                    <li><h4><b>Phone number</b> :<span id="pn"><%=list.phone_no%></span></h4></li>
+                    <li><h4><b>Email</b> :<span id="email"><%=list.email%></span></h4></li>
+                    <li><h4><b>Class</b>:<span id="s"><%=list.class%></span></h4></li>
+                    <li><h4><b>RollNumber</b> :<span id="r" ><%=list.rollno%></span></h4></li>
+                    <li><h4><b>Admission Id</b> :<span id="a" ><%=list.admissionid%></span></h4></li>
+
+                    <li><button onclick="updateinfo()">change</button></li>
+                </ul>
+                
+            <%}%>
+
+            <% if(list==0){%>
+                 
+                <h1><%= "Student not found" %><br></h1>
+                
+            <%}%>
+
+
+            </div>
+         </div>
+         <script>
+            function updateinfo()
+            {
+                var fname = document.getElementById('fn').innerHTML;
+                var lname = document.getElementById('ln').innerHTML;
+                var email = document.getElementById('email').innerHTML;
+                var fathername = document.getElementById('ffn').innerHTML;
+                var phonenumber = document.getElementById('pn').innerHTML;
+                var standard = document.getElementById('s').innerHTML;
+                var roll = document.getElementById('r').innerHTML;
+                var id = document.getElementById('a').innerHTML;
+                document.getElementById('fname').value = fname;
+                document.getElementById('lname').value = lname;
+                document.getElementById('emailid').value = email;
+                document.getElementById('fathername').value = fathername;
+                document.getElementById('phonenumber').value = phonenumber;
+                document.getElementById('standard').value = standard;
+                document.getElementById('roll').value = roll;
+                document.getElementById('id').value = id;
+            }
+         </script>
+    </body>
+</html>

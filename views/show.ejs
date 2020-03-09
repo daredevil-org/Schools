@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>show students</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="stylesheets/admin-style.css">
+    </head>
+    <body>
+        <input type="button" value="homepage" onclick="location.href='/admin_homepage'" class="w3-button w3-round w3-blue btn" />
+        
+        <%  list.forEach(list => {%>
+            <% if(list){%>
+                <hr>
+               <p> firstname: <b><%=list.firstname%></b><br></p>
+               <p> lastname: <b><%=list.lastname%></b><br></p>
+               <p> fathername: <b><%=list.fathername%></b><br></p>
+               <p>  phone number: <b><%=list.phone_no%></b><br></p>
+               <p> roll number: <b><%=list.rollno%></b><br></p>
+               <p>  email : <b><%=list.email%></b><br></p>
+               <p> class: <b><%=list.class%></b><br></p>
+               <p> admission number: <b><%=list.admissionid%></b><br></p>
+               <hr>
+
+    <%}})%>
+        
+    </body>
+</html>

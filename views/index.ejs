@@ -3,9 +3,13 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/admin-style.css">
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1>Welcome to <%= title %></h1>
+    <input type="button" value="admin login" onclick="location.href='/admin_loginpage'" class="w3-button w3-round w3-blue btn"/><br>
+    <input type="button" value="accountant login" onclick="location.href='/accountant_loginpage'" class="w3-button w3-round w3-blue btn"/>
   </body>
 </html>

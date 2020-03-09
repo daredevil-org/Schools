@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            updating the student info
+        </title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="stylesheets/admin-style.css">
+    </head>
+    <body>
+        <div class="container">
+            <% if ( text ) {%>
+              <br>
+              <div class="alert alert-success" role="alert" align="center" id="close">
+                <h4><%= text %></h4>
+              </div>
+              <% } %>
+        <div class="w3-container w3-white w3-panel w3-border w3-round-large size2">
+            <form action="/update_StudentInfo" method="POST" >
+                <h1>Update student deatils</h1>
+                <p>enter the admission number:</p>
+                <input type="text" class="w3-border w3-round" name="rollno" /><br>
+                <input type="submit" value="update" class="w3-button w3-round w3-blue btn"/>
+                <input type="button" value="homepage" class="w3-button w3-round w3-blue btn" onclick="location.href='/admin_homepage'" />
+            </form>
+        </div>
+    </body>
+</html>
