@@ -4,20 +4,30 @@ var mongoose = require('mongoose');
 var nodemailer = require('nodemailer');
 var async = require('async');
 var crypto = require('crypto');
+var shortid = require('shortid');
+shortid.characters('0123456789');
 var middleware = require("../middleware");
 var router = express.Router();
-// var db;
 var fee = require('../models/fee');
 var accountant = require('../models/accountant');
-var admin =require('../models/admin');
-var student =require('../models/student');
+var admin = require('../models/admin');
+var student = require('../models/student');
+var students = require('../models/student1');
+mongoose.set('useFindAndModify', false);
 
 // connecting to database #mongodb
-let url = process.env.DATABASEURL || "mongodb://localhost/skl";
- mongoose.connect(url, { useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true },function(err,database){
-    db=database;
-    console.log('Connected to Mongodb!');
- });
+// let url = process.env.DATABASEURL || "mongodb://localhost/school";
+//  mongoose.connect(url, { useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true,useFindAndModify:false },function(err,database){
+//     console.log('Connected to Mongodb!');
+//  });
+
+// mongo atlas
+// connecting to mlab
+const uri = "mongodb+srv://Eshwar:ani4anirudh1999%23@cluster-info-rm5w6.mongodb.net/school?retryWrites=true&w=majority";
+
+mongoose.connect(uri,{useNewUrlParser:true,useUnifiedTopology:true,useCreateIndex: true})
+.then(() => console.log(`Connected to mlab..!!`))
+.catch(err => console.log(`Database connection error: ${err.message}`));
 
 // Forgot password code for admin
 router.get('/forgot_admin',function(req,res){
@@ -54,7 +64,7 @@ router.post('/forgot_admin', function(req, res, next) {
         service: 'Gmail', 
         auth: {
           user: 'mrcetclub@gmail.com',
-          pass: '#thedarkangels'
+          pass: '#thedarkangel'
         }
       });
       var mailOptions = {
@@ -121,7 +131,7 @@ router.post('/reset_admin/:token', function(req, res) {
         service: 'Gmail', 
         auth: {
           user: 'mrcetclub@gmail.com',
-          pass: '#thedarkangels'
+          pass: '#thedarkangel'
         }
       });
       var mailOptions = {
@@ -177,7 +187,7 @@ router.post('/forgot', function(req, res, next) {
         service: 'Gmail', 
         auth: {
           user: 'mrcetclub@gmail.com',
-          pass: '#thedarkangels'
+          pass: '#thedarkangel'
         }
       });
       var mailOptions = {
@@ -191,13 +201,13 @@ router.post('/forgot', function(req, res, next) {
       };
       smtpTransport.sendMail(mailOptions, function(err) {
         console.log('mail sent');
-        req.flash("msg", "An e-mail has been sent to " + user.email + " with further instructions.");
+        req.flash("message", "An e-mail has been sent to " + user.email + " with further instructions.");
         done(err, 'done');
       });
     }
   ], function(err) {
     if (err) return next(err);
-    res.render('forgot',{text:req.flash("msg")});
+    res.render('forgot',{text:req.flash("message")});
   });
 });
 
@@ -244,7 +254,7 @@ router.post('/reset/:token', function(req, res) {
         service: 'Gmail', 
         auth: {
           user: 'mrcetclub@gmail.com',
-          pass: '#thedarkangels'
+          pass: '#thedarkangel'
         }
       });
       var mailOptions = {
@@ -265,14 +275,17 @@ router.post('/reset/:token', function(req, res) {
   });
 });
 
+// All the GET Methods starts from here
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'School admission management system' });
 });
+
 // GET Mainpage
 router.get('/mainpage',function(req,res,next){
   res.render('mainpage',{text:req.flash("msg")});
 });
+
 // GET accounatant login page
 router.get('/accountant_loginpage',function(req,res){
   req.flash("msg","Please Login to continue.");
@@ -308,6 +321,7 @@ router.get('/admin_registerpage',function(req,res){
   req.flash("msg","Register an admin here");
   res.render('admin_registerpage',{text:req.flash("msg")});
 }); 
+
 // GET to logout
 router.get('/logout',function(req,res){
   // console.log(req.isAuthenticated());
@@ -332,8 +346,7 @@ router.get('/signout_admin',function(req,res){
     res.render('admin_homepage',{text:req.flash("msg")});
   }
   else{
-    req.flash("msg","Successfully logged out");
-    res.render('admin_loginpage',{text:req.flash("msg")});
+    res.redirect('/admin_loginpage');
   }
 });
 
@@ -343,6 +356,32 @@ router.get('/update_fee',middleware.checkadminAuthentication,function(req,res){
   res.render('update_fee',{text:req.flash("msg")});
 });
 
+//GET for search page
+router.get('/search',middleware.checkadminAuthentication,function(req,res,next){
+  req.flash("msg","Enter the admission number to search")
+  res.render('search',{text:req.flash("msg"),student:""});
+});
+
+//GET for Student Info page
+router.get('/insert_StudentInfo',middleware.checkadminAuthentication,function(req,res,next){
+   // To display the fee deatails
+   fee.find({},function(err,result){
+    if(err)
+    console.log(err);
+    res.render('insert_StudentInfo',{list:result,text:'insert here'});
+  });
+ 
+});
+
+// 
+router.get('/createdata',function(req,res){
+  fee.create({},function(err,result){
+    if(err)
+    console.log(err);
+    console.log('created');
+  });
+  res.redirect('/');
+});
 // POST for update fee
 router.post('/fee_update',function(req,res){
     // all the code goes here
@@ -360,71 +399,144 @@ router.post('/fee_update',function(req,res){
     res.render('update_fee',{text:req.flash("msg")})
 });
 
-// GET for create
-router.get('/create',function(req,res){
-  res.render('create',{text:'submit here'});
-});
-
-// POST to create dynamic collection
-router.post('/create',function(req,res){
-
-  var name = req.body.getname;
-  var newCollection = mongoose.model(name,student);
-  newCollection.create({},function(err,result){
-    if(err)
-    console.log(err);
-    else
-    console.log("Done...!");
-  });
-  res.render('create',{text:'Done!'});
-});
-//get search
-router.get('/search',function(req,res,next){
-  res.render('search',{text:'search student roll'});
-});
-//post for search
+//POST for search page
 router.post('/search',function(req,res){
  var obj={
-   rollnumber:req.body.rollno};
- console.log(obj);
- 
+   admissionid:req.body.adminid}; 
  student.findOne(obj,function(err,result){
    if(err){
      console.log(err);
+     res.render('/',{text:"Some Error happended please try after some time"});
    }
-   if(result!==null){ res.render('search',{text:'found'});}
-  else{res.render('search',{text:'not found'});}
+   if(result !== null)
+   { 
+     res.render('search',{text:'found',student:result});
+    }
+    else
+    {
+      res.render('search',{text:'not found',student:""});
+    }
  });
- //res.render('search',{text:'not found});
-});
-
-//GET for Student Info page
-router.get('/insert_StudentInfo',function(req,res,next){
-  fee.find({},function(err,result){
-    if(err) {console.log(err);}
-    res.render('insert_StudentInfo',{list:result});
 });
 
 //POST for Student Info page
 router.post('/insert_StudentInfo',function(req,res,next){
-     var obj={
-         firstname:req.body.firstname,
-         lastname:req.body.lastname,
-         fathername:req.body.fathername,
-         phone_no:req.body.phone_no,  
-         email:req.body.email,     
-         rollno:req.body.rollno, 
-     };
-     student.create(obj,function(err,res){
-         if(err) {console.log(err);}
-         console.log(res);
-     });
-     console.log("inserted successfully...");
+   var obj={
+    firstname:req.body.firstname,
+    lastname:req.body.lastname,
+    fathername:req.body.fathername,
+    phone_no:req.body.phone_no,  
+    email:req.body.email,     
+    rollno:req.body.rollno, 
+    class:req.body.class,
+    fee:0,
+    admissionid:shortid.generate(),
+  };
+  // To create a student document in mongodb
+  student.create(obj,function(err,result){
+    if(err)
+    {
+      console.log(err);
+    }
+    console.log("inserted successfully...");
+    res.render('displayed',{list:result,text:'inserted'});
+    });
+    // To display the fee deatails
     fee.find({},function(err,result){
-        if(err) {console.log(err);}
-        console.log(res);
-         res.render('insert_StudentInfo',{list:result});
-     });
+      if(err)
+      console.log(err);
+     
+    });
+    
+});
+
+// GET for show page
+router.get('/show',function(req,res,next){
+  student.find({},function(err,result){
+    if(err)
+    console.log(err);
+    res.render('show',{list:result});
+  });
+});
+
+// GET for payment page
+router.get('/payment',middleware.isLoggedIn,function(req,res){
+  res.render('payment');
+}); 
+
+// POST for paymentInfo
+router.post('/paymentInfo',function(req,res){
+  student.findOne({admissionid:req.body.rollno},function(err,result){
+    if(err)
+    console.log(err);
+    if(result !== null)
+    res.render('paymentInfo',{list:result});
+    else{
+      res.render('paymentInfo',{list:0});
+    }
+  });
+});
+
+// GET for update student information
+router.get('/update',middleware.checkadminAuthentication,function(req,res){
+  res.render('update',{text:'update here'});
+});
+
+// GET for update
+router.get('/update_StudentInfo',middleware.checkadminAuthentication,function(req,res){
+  res.render('update_StudentInfo',{list:0,text:'update here'});
+});
+
+// POST for  update student information
+router.post('/update_StudentInfo',function(req,res){
+  var obj = {admissionid:req.body.rollno}
+  student.findOne(obj,function(err,result){
+    if(err)
+    console.log(err);
+    if(result !== null)
+    res.render('update_StudentInfo',{list:result,text:'re-enter all the details for updating student info'});
+    else
+    res.render('update_StudentInfo',{list:0});
+  });
+});
+
+// POST for updating student information
+router.post('/updateInfo',function(req,res){
+  var obj = {
+    firstname:req.body.firstname,
+    lastname:req.body.lastname,
+    fathername:req.body.fathername,
+    phone_no:req.body.phone_no,  
+    email:req.body.email,  
+    rollno:req.body.r,   
+    class:req.body.class,
+    admissionid:req.body.admissionid
+  }
+  // console.log(obj);  
+  student.replaceOne({admissionid:req.body.admissionid},obj,function(err,result){
+    if(err)
+    console.log(err);
+    console.log(result);
+  })
+  res.render('update',{text:'updated'});
+}); 
+
+// GET for feepayment
+router.get('/feepayment',middleware.checkadminAuthentication,function(req,res){
+  res.render('feepayment',{text:'update here'});
+});
+
+// POST for payfee
+router.post('/payfee',function(req,res){
+  var obj = {
+    fee:req.body.fee,
+  }
+  student.findOneAndUpdate({admissionid:req.body.rollno},obj,function(err,respone){
+    if(err)
+    console.log(err);
+    console.log('updated fee');
+  });
+  res.render('feepayment',{text:' fee updated '});
 });
 
 // GET for create
@@ -432,11 +544,13 @@ router.get('/create',function(req,res){
   res.render('create',{text:'submit here'});
 });
 
+
 // POST to create dynamic collection
 router.post('/create',function(req,res){
 
   var name = req.body.getname;
-  var newCollection = mongoose.model(name,student);
+var newCollection = mongoose.model(name,students);
+
   newCollection.create({},function(err,result){
     if(err)
     console.log(err);
@@ -464,7 +578,6 @@ router.post('/login_accountant',function(req,res,next){
             let redirectTo = req.session.redirectTo ? req.session.redirectTo : ('/accountant_homepage');
             delete req.session.redirectTo;            
             res.redirect(redirectTo);
-   
     });
 })(req, res, next);
 }); 
@@ -487,7 +600,6 @@ router.post('/login_admin',function(req,res,next){
             let redirectTo = req.session.redirectTo ? req.session.redirectTo : ('/admin_homepage');
             delete req.session.redirectTo;            
             res.redirect(redirectTo);
-   
     });
 })(req, res, next);
 }); 
@@ -512,7 +624,6 @@ router.post('/signupaccountant',function(req,res){
         console.log(err);
         return res.redirect("/error");
     }
-
     passport.authenticate("accountant")(req, res, () => {        
         console.log(newUser);
         req.flash("msg","Successfully Logged In");
@@ -524,7 +635,6 @@ router.post('/signupaccountant',function(req,res){
 
 // POST admin register
 router.post('/signupadmin',function(req,res){
-
   var newUser1 = new admin({
     username : req.body.username,
     email:req.body.email,
@@ -542,7 +652,6 @@ router.post('/signupadmin',function(req,res){
         console.log(err);
         return res.redirect("/error");
     }
-
     passport.authenticate("admin")(req, res, () => {        
         console.log(newUser1);
         req.flash("msg","Successfully Logged In");
@@ -551,23 +660,5 @@ router.post('/signupadmin',function(req,res){
   });
 
 });
-
-function checkIsLoggedIn() {
-  return (req,res,next) =>{
-  if (req.isAuthenticated()) {
-    accountant.findOne({username:req.user.username}, (err, foundname) => {
-        if (err || !foundname) {
-            req.flash("error", "You Cannot Do that Please Logout First");
-            res.render("accountant_homepage",{text:req.flash("error")});
-        } else {
-               return next();
-        }
-    });
-} else {
-    res.redirect("/accountant_loginpage");
-}
-  }
-
-}
 
 module.exports = router;
