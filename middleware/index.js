@@ -10,6 +10,7 @@ middlewareObj.isLoggedIn = function (req, res, next) {
     req.flash("msg", "You need to be logged in first"); // add a one-time message before redirect
     res.redirect("/mainpage");
 };
+
 // accountant authentication middleware
 middlewareObj.checkAuthentication = function (req, res, next) {
     if (req.isAuthenticated()) {
@@ -27,6 +28,7 @@ middlewareObj.checkAuthentication = function (req, res, next) {
          res.redirect("/accountant_loginpage");
     }
 };
+
 // admin authentication middleware
 middlewareObj.checkadminAuthentication = function (req, res, next) {
     if (req.isAuthenticated()) {
@@ -45,9 +47,6 @@ middlewareObj.checkadminAuthentication = function (req, res, next) {
         res.redirect("/admin_loginpage");
     }
 };
-
-
-
 
 middlewareObj.isAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
