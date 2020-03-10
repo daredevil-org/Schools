@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="stylesheet1.css">
+<link rel="stylesheet" href="stylesheet2.css">
+<link rel="stylesheet" href="stylesheet3.css">
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+</style>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-blue w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <input type="button" value="update fee" onclick="location.href='/update_fee'" method="GET" class="w3-button w3-round w3-blue btn"/>
+    <input type="button" value="search student" onclick="location.href='/search'" method="GET" class="w3-button w3-round w3-blue btn"/>
+    <input type="button" value="Insert Student" onclick="location.href='/insert_StudentInfo'" method="GET" class="w3-button w3-round w3-blue btn"/>
+    <input type="button" value="payment" onclick="location.href='/payment'" method="GET" class="w3-button w3-round w3-blue btn"/>
+    <input type="button" value="update student info" onclick="location.href='/update'" method="GET" class="w3-button w3-round w3-blue btn"/>
+    <input type="button" value="fee payment" onclick="location.href='/feepayment'" method="GET" class="w3-button w3-round w3-blue btn" />
+    <input type="button" value="show students" onclick="location.href='/show'" method="GET" class="w3-button w3-round w3-blue btn" />
+    <input type="submit" value="logout" onclick="location.href='/signout_admin'" method="GET" class="w3-button w3-round w3-blue btn"/>
+  </div>
+</div>
+<img src="scl.jpg" height="630" width="1400">
+</body>
+</html>
