@@ -5,7 +5,8 @@ var nodemailer = require('nodemailer');
 var async = require('async');
 var crypto = require('crypto');
 var shortid = require('shortid');
-shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@');
+// change this
+//shortid.characters('0123456789');
 var middleware = require("../middleware");
 var router = express.Router();
 var fee = require('../models/fee');
@@ -16,18 +17,10 @@ var students = require('../models/student1');
 mongoose.set('useFindAndModify', false);
 
 // connecting to database #mongodb
-// let url = process.env.DATABASEURL || "mongodb://localhost/school";
-//  mongoose.connect(url, { useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true,useFindAndModify:false },function(err,database){
-//     console.log('Connected to Mongodb!');
-//  });
-
-// mongo atlas
-// connecting to mlab
-const uri = "mongodb+srv://Eshwar:ani4anirudh1999%23@cluster-info-rm5w6.mongodb.net/school?retryWrites=true&w=majority";
-
-mongoose.connect(uri,{useNewUrlParser:true,useUnifiedTopology:true,useCreateIndex: true})
-.then(() => console.log(`Connected to mlab..!!`))
-.catch(err => console.log(`Database connection error: ${err.message}`));
+let url = process.env.DATABASEURL || "mongodb://localhost/school";
+ mongoose.connect(url, { useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true },function(err,database){
+   console.log("Conneted to local mongodb");
+ });
 
 // Forgot password code for admin
 router.get('/forgot_admin',function(req,res){
@@ -73,7 +66,7 @@ router.post('/forgot_admin', function(req, res, next) {
         subject: 'Password Reset',
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'https://sklsystem.herokuapp.com'  + '/reset_admin/' + token + '\n\n' +
+          "http://" + req.headers.host + '/reset_admin/' + token + '\n\n' +
           'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
