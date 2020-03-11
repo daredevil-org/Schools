@@ -18,15 +18,15 @@
             </div>
             <% } %>
     <div>
-        <div class="w3-container w3-white w3-panel w3-border w3-round-large size2">
+        <div class="w3-container w3-white w3-panel w3-border w3-round-large size">
         <form action="/login_admin" class="formset" method="POST">
-            <h2 id="log"><u>Admin Login</u></h2><br>
+            <h2 id="log"><u>Login</u></h2><br>
             <h4>Username:</h4>
-            <input  class="w3-border w3-round" type="text" name="username" placeholder="Alex" required>
+            <input  class="w3-border w3-round" type="text" name="username" pattern="[A-Za-z]{0-30}" placeholder="Alex" required>
             <h4 >Password:</h4>
-            <input id="hover" class="w3-border w3-round" type="password" name="password" placeholder="password" required>
+            <input id="hover" class="w3-border w3-round" type="password" minlength="6" name="password" placeholder="password" required>
             <button class="w3-button w3-round w3-blue btn" onclick="location.href='/login_admin'">Sign In</button>
-            <div class="anchor"><a href="/forgot_admin" >Forgot password?</a></div>
+            <div class="anchor"><a href="#" >Forgot password?</a></div>
         </form>
 
         </div>
