@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html>
 <head>
 <title>Admin Sign Up</title>
@@ -20,13 +20,13 @@
                     <form action="/signupadmin" method="POST" class="formset">
                     	<u><h2 id="log"> Admin Registration</h2></u><br>
 					  <h3>Username:</h3>
-					  <input type="text" class="w3-border w3-round" name="username" required="required" placeholder="Example"/>
+					  <input type="text" class="w3-border w3-round" name="username"  pattern="[A-Za-z]{0-30}" required="required" placeholder="Example"/>
                       <h3>Email:</h3>
-                      <input class="w3-border w3-round"type="text" name="email" id="identity"  required="required" placeholder="example@mail.com">
+                      <input class="w3-border w3-round"type="email" name="email" id="identity"  required="required" placeholder="example@mail.com">
                       <h3>Mobile:</h3>
                       <input class="w3-border w3-round" type="tel" name="mobile" required="required" placeholder="91210*****" />                
                       <h3>Password:</h3>
-					  <input class="w3-border w3-round" type="password" name="password" id="password1"  required="required" placeholder="Password">
+					  <input class="w3-border w3-round" type="password" minlength="6" name="password" id="password1"  required="required" placeholder="Password">
 					  <h3>Confirm Password:</h3>
 					  <input class="w3-border w3-round" type="password" name="ConfirmPassword" id="password2"  required="required" placeholder="Confirm Password">
                         <br>
