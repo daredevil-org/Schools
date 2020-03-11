@@ -20,14 +20,15 @@
     <div>
         <div class="w3-container w3-white w3-panel w3-border w3-round-large size">
         <form action="/login_accountant" class="formset" method="POST">
-            <h2 id="log"><u> Accountant Login</u></h2><br>
+            <h2 id="log"><u>Login</u></h2><br>
             <h4>Username:</h4>
-            <input  class="w3-border w3-round" type="text" name="username" placeholder="Alex" required/>
+            <input  class="w3-border w3-round" type="text" pattern="[a-zA-Z]{0-30}" name="username" placeholder="Alex" required>
             <h4 >Password:</h4>
-            <input id="hover" class="w3-border w3-round" type="password" name="password" placeholder="password" required/>
+            <input id="hover" class="w3-border w3-round" minlength="6" type="password" name="password" placeholder="password" required>
             <button class="w3-button w3-round w3-blue btn" onclick="location.href='/login_accountant'">Sign In</button>
             <div class="anchor"><a href="/forgot" >Forgot password?</a></div>
         </form>
+
         </div>
         <script>
         setTimeout(function(){
