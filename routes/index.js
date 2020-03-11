@@ -5,7 +5,7 @@ var nodemailer = require('nodemailer');
 var async = require('async');
 var crypto = require('crypto');
 var shortid = require('shortid');
-shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@');
+shortid.characters('0123456789');
 var middleware = require("../middleware");
 var router = express.Router();
 var fee = require('../models/fee');
@@ -16,22 +16,10 @@ var students = require('../models/student1');
 mongoose.set('useFindAndModify', false);
 
 // connecting to database #mongodb
-// let url = process.env.DATABASEURL || "mongodb://localhost/csv";
-//  mongoose.connect(url, { useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true },function(err,database){
-//  });
-// mongoose.connect(process.env.MONGODB_URI || process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/schools').then(()=>console.log("connected"));
-mongoose.set('useCreateIndex', true);
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://Eshwar:ani4anirudh1999#@cluster-info-rm5w6.mongodb.net/school?retryWrites=true&w=majority";
-//  var uri = process.env.DATABASEURL ||"mongodb+srv://Eshwar:ani4anirudh1999%23@cluster-info-rm5w6.mongodb.net/school?retryWrites=true&w=majority";
-// var uri = 'mongodb+srv://eshwar:ani4anirudh1999%23@cluster-school-gjlcm.mongodb.net/test?retryWrites=true&w=majority';
-// const uri = "mongodb+srv://eshwar:ani4anirudh1999%23@cluster-school-gjlcm.mongodb.net/school?retryWrites=true&w=majority";
-mongoose.connect(uri,{useUnifiedTopology:true,useCreateIndex: true,useFindAndModify:false})
-.then(() => console.log(`Connected to mlab..!!`))
-.catch(err => console.log(`Database connection error: ${err.message}`));
-
-
-
+let url = process.env.DATABASEURL || "mongodb://localhost/school";
+ mongoose.connect(url, { useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true },function(err,database){
+   console.log("Conneted to local mongodb");
+ });
 
 // Forgot password code for admin
 router.get('/forgot_admin',function(req,res){
@@ -77,7 +65,7 @@ router.post('/forgot_admin', function(req, res, next) {
         subject: 'Password Reset',
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'https://sklsystem.herokuapp.com'  + '/reset_admin/' + token + '\n\n' +
+          "http://" + req.headers.host + '/reset_admin/' + token + '\n\n' +
           'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
@@ -532,14 +520,19 @@ router.get('/feepayment',middleware.checkadminAuthentication,function(req,res){
 
 // POST for payfee
 router.post('/payfee',function(req,res){
-  var obj = {
-    fee:req.body.fee,
-  }
-  student.findOneAndUpdate({admissionid:req.body.rollno},obj,function(err,respone){
+  var temp = req.body.fee;
+  student.findOne({admissionid:req.body.rollno},function(err,result){
+    if(err)
+    console.log(err);
+    result.fee += Number(temp);
+    
+  student.findOneAndUpdate({admissionid:req.body.rollno},result,function(err,respone){
     if(err)
     console.log(err);
     console.log('updated fee');
+    console.log(respone);
   });
+});
   res.render('feepayment',{text:' fee updated '});
 });
 
@@ -548,7 +541,30 @@ router.get('/create',function(req,res){
   res.render('create',{text:'submit here'});
 });
 
-
+// GET method for promoting students
+router.get('/promote',function(req,res){
+  student.find({},function(err,result){
+    if(err)
+    console.log(err);
+    for(var i =0;i<result.length;i++)
+    {
+      result[i].class += 1;
+      if(result[i].class > 10)
+      {
+        result[i].class = 10;
+        result[i].promoted = true;
+      }
+        student.replaceOne({admissionid:result[i].admissionid},result[i],function(err,answer){
+          if(err)
+          console.log(err)
+          console.log(answer);
+          // console.log("promoted");
+        });
+    }
+    console.log("promoted");
+  });
+  res.render("promoted",{text:'promoted all students'});
+});
 // POST to create dynamic collection
 router.post('/create',function(req,res){
 
