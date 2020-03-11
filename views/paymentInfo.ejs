@@ -14,11 +14,12 @@
         <div align="center"><br>
          <br>
         
-             <% if(list){%>
-                 
-                <p> RollNumber :<%=list.rollno%><br></p>
-                <p> Amount paid: <%=list.fee%><br></p>
-            <%}%>
+         <% if(list){%>
+            <p>Firstname :<%= list.firstname %><br></p>
+            <p> RollNumber :<%=list.rollno%><br></p>
+            <p> class :<%=list.class%><br></p>
+            <p> Amount paid: <%=list.fee%><br></p>
+        <%}%>
 
             <% if(list==0){%>
                  

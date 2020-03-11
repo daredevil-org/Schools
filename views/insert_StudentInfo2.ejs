@@ -23,10 +23,9 @@
                 <h4>Email:</h4>
                 <input  class="w3-border w3-round" type="text" name="email" placeholder="abc@gmail.com" required><br>
                 <h4>roll no:</h4>
-                <input  class="w3-border w3-round" type="number" name="rollno" placeholder="10" required><br>
+                <input  class="w3-border w3-round" type="text" name="rollno" placeholder="10" required><br>
                 <h4>Class:</h4>
-                <input type="number" class="w3-border w3-round" name="class" placeholder="5" required/>
-                <!-- <select  class="w3-border w3-round" type="Number" id="class" name="class" placeholder="class_six" required>
+                <select  class="w3-border w3-round" id="class" name="class" placeholder="class_six" onclick="updatefee()" required>
                     <option value="class_lkg">class_lkg</option>
                     <option value="class_ukg">class_ukg</option>
                     <option value="class_one">class_one</option>
@@ -39,7 +38,7 @@
                     <option value="class_eight">class_eight</option>
                     <option value="class_nine">class_nine</option>
                     <option value="class_ten">class_ten</option>
-                </select><br> -->
+                </select><br>
                 <h4>fee:</h4>
                 <input  class="w3-border w3-round" id="fee" name="fee" required><br>
                 <button class="w3-button w3-round w3-blue btn" onclick="">Submit</button>
@@ -76,6 +75,7 @@
             {
                 var x = document.getElementById("fee");
                 var lkg = document.getElementById('lkg').innerHTML;
+                console.log(lkg);
                 var ukg = document.getElementById('ukg').innerHTML;
                 var one = document.getElementById('one').innerHTML;
                 var two = document.getElementById('two').innerHTML;
@@ -88,7 +88,7 @@
                 var nine = document.getElementById('nine').innerHTML;
                 var ten = document.getElementById('ten').innerHTML;
                 var option = document.getElementById("class").value;
-                
+                console.log(option);
                 if(option==lkg)
                    x.value = lkg;
                 if(option==ukg)
@@ -117,4 +117,4 @@
          </script>
 
     </body>
-</html>  
+</html> 
