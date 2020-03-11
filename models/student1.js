@@ -25,7 +25,7 @@ var studentSchema = new schema({
         required:true,
     },
     class:{
-        type:String,
+        type:Number,
         required:true,
     },
     phone_no:{
@@ -41,6 +41,10 @@ var studentSchema = new schema({
         type:String,
         required:false,
     }, 
+    promoted:{
+        type:Boolean,
+        default:false,
+    }
     
 })
 
